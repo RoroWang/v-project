@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="/css/base.css">
+		<script src="./js/ajax.js"></script>
+		<script src="./js/socket.io.js"></script>
+	</head>
+	<body>
+		<h3>用户端</h3>
+	</body>
+	<script>
+		ajax({
+			url:'http://localhost:3000/api/home',
+			data:{
+				_page:1,
+				_limit:5
+			},
+			success:function(res){
+				console.log('客户端',res)
+			}
+		})
+		ajax({
+			// url:'http://v.juhe.cn/toutiao/index',
+			url:'http://localhost:3000/proxy/juhe',
+			data:{
+			  // key:'55f8053eba54dab5a301a00f45523164'
+			  // start:0,
+			  // count:5
+			},
+			success:function(res){
+			  console.log('客户端douban-juhe',res)
+			}
+		})
+	</script>
+	<script>
+		var socket = io('http://localhost:3000/');//链接服务端
+		
+		//客户端订阅
+		socket.on('mess_type',(data)=>{
+		  console.log('首页_客户端收到',data)
+		  //dom 操作
+		})
+	</script>
+</html>
